@@ -25,7 +25,7 @@ if __name__ == "__main__":
     rome_gen = index_sequence_without_perturb(City("Rome"))
     barcelona_gen = index_sequence_without_perturb(City("Barcelona"))
 
-    for i in range(iters):
+    for _ in range(iters):
         rome_idx = next(rome_gen)
         barcelona_idx = next(barcelona_gen)
 
@@ -37,7 +37,7 @@ if __name__ == "__main__":
     rome_gen = index_sequence(City("Rome"), PERTURB_SHIFT=3)
     barcelona_gen = index_sequence(City("Barcelona"), PERTURB_SHIFT=3)
 
-    for i in range(iters):
+    for _ in range(iters):
         rome_idx = next(rome_gen)
         barcelona_idx = next(barcelona_gen)
 
