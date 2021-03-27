@@ -6,10 +6,17 @@ def index_sequence(key, mask=0b111, PERTURB_SHIFT=5):
     i = perturb & mask
     yield i
     while True:
-        i = ((i << 2) + i + perturb + 1)
         perturb >>= PERTURB_SHIFT
-        yield i & mask
+        i = (i * 5 + perturb + 1) & mask
+        yield i
 
+def index_sequence_without_perturb(key, mask=0b111):
+    perturb = hash(key)
+    i = perturb & mask
+    yield i
+    while True:
+        i = (i * 5 + perturb + 1) & mask
+        yield i
 
 class ForceHash(object):
 
@@ -26,11 +33,11 @@ class ForceHash(object):
 def sample_probe(force_hash, num_samples=10):
     probe_values = index_sequence(force_hash)
     indexes = islice(probe_values, num_samples)
-    print "First {} samples for hash {: >10}: {}".format(
+    print ("First {} samples for hash {: >10}: {}".format(
         num_samples,
         force_hash,
         list(indexes)
-    )
+    ))
 
 
 if __name__ == "__main__":
